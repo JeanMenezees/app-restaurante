@@ -29,7 +29,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(options => {
     options.AllowAnyHeader();
     options.AllowAnyMethod();
-    options.WithOrigins(/*url de quem pode enviar requests*/);
+    options.WithOrigins("http://localhost:3000");
 });
 
 app.UseHttpsRedirection();

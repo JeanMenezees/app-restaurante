@@ -1,5 +1,6 @@
 using Entidades;
 using Contexto;
+using Microsoft.EntityFrameworkCore;
 
 namespace Repositorios
 {
@@ -25,17 +26,19 @@ namespace Repositorios
             }
         }
 
-        public async Task AdicionarClienteNaMesa(Mesa mesa, string nomeCliente)
+        public async Task AdicionarClienteNaMesa(Mesa mesa)
         {
             try
             {
-                mesa.AdicionarCliente(nomeCliente);
-                await _contexto.SaveChangesAsync();
+                _contexto.Entry(mesa).State = EntityState.Modified;
+                mesa.MesaOcupada();
+                await _contexto.SaveChangesAsync(); 
             }
             catch
             {
-                throw new Exception("Falha ao adicionar cliente");
+                throw new NullReferenceException($"Não foi possivel adicionar o cliente");
             }
+            
         }
 
         public async Task RemoverClienteNaMesa(int idMesa)

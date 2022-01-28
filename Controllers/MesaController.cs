@@ -62,15 +62,21 @@ namespace Controllers
         [HttpPut("AdicionarCliente")]
         public async Task<ActionResult<Mesa>> AdicionarCliente(int idMesa, [FromBody] Mesa mesa)
         {
-            mesa =_repositorioMesa.ObterMesaPorId(idMesa);
             try
             {
-                await _repositorioMesa.AdicionarClienteNaMesa(idMesa, nomeCliente);
-                return Ok();
+                if (idMesa == mesa.Id)
+                {
+                    await _repositorioMesa.AdicionarClienteNaMesa(mesa);
+                    return Ok();
+                }
+                else
+                {
+                    return BadRequest();
+                }
             }
             catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Erro ao obter Mesa");
+                return BadRequest("Falha ao adicionar Cliente");
             }
         }
 

@@ -7,9 +7,8 @@ namespace Entidades
         public bool Ocupada { get; set; }
         public decimal Conta { get; set; }
 
-        public void AdicionarCliente(string nomeDoCliente)
+        public void MesaOcupada()
         {
-            this.Cliente = nomeDoCliente;
             this.Ocupada = true;
         }
 
