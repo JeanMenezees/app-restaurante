@@ -25,9 +25,8 @@ namespace Repositorios
             }
         }
 
-        public async Task AdicionarClienteNaMesa(int idMesa, string nomeCliente)
+        public async Task AdicionarClienteNaMesa(Mesa mesa, string nomeCliente)
         {
-            var mesa = await ObterMesaPorId(idMesa);
             try
             {
                 mesa.AdicionarCliente(nomeCliente);

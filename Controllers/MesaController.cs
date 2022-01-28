@@ -59,9 +59,10 @@ namespace Controllers
             }
         }
 
-        [HttpPost("AdicionarCliente")]
-        public async Task<ActionResult<Mesa>> AdicionarCliente(int idMesa, string nomeCliente)
+        [HttpPut("AdicionarCliente")]
+        public async Task<ActionResult<Mesa>> AdicionarCliente(int idMesa, [FromBody] Mesa mesa)
         {
+            mesa =_repositorioMesa.ObterMesaPorId(idMesa);
             try
             {
                 await _repositorioMesa.AdicionarClienteNaMesa(idMesa, nomeCliente);
